@@ -1,7 +1,24 @@
+package minecraft.ai;
+
+import java.awt.*;
+import java.awt.event.KeyEvent;
+
 public class Action {
 
-    public void jump() {
+    Robot robot;
 
+    {
+        try {
+            robot = new Robot();
+        } catch (AWTException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void jump() {
+        robot.delay(1000);
+        robot.keyPress(KeyEvent.VK_SPACE);
+        robot.delay(1000);
     }
 
     public void move(boolean sprinting) {
@@ -37,6 +54,6 @@ public class Action {
     }
 
     public void moveToBlock() {
-        
+
     }
 }

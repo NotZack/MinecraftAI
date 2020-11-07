@@ -1,5 +1,8 @@
+package minecraft.ai;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -16,10 +19,11 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-/** EntryPoint.java
+/** minecraft.ai.EntryPoint.java
  * @author Zackary Nichol
  *
  */
+@Mod(value = "minecraftai")
 public class EntryPoint {
 
     // Directly reference a log4j logger.
@@ -28,7 +32,7 @@ public class EntryPoint {
     /**
      * Entry point into the application, registers events for the mod to run.
      */
-    EntryPoint() {
+    public EntryPoint() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading

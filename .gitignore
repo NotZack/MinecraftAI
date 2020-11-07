@@ -1,12 +1,25 @@
-# IntellijJ files
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
+*.iml
 .idea
-.DS_Store
 
-#Gradle files
+# gradle
+build
 .gradle
-/build/
-/out/
 
-# GitHub files
-README.md
+# other
+eclipse
+run
 
+# Files from Forge MDK
+forge*changelog.txt

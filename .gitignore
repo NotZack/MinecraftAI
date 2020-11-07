@@ -1,0 +1,12 @@
+# IntellijJ files
+.idea
+.DS_Store
+
+#Gradle files
+.gradle
+/build/
+/out/
+
+# GitHub files
+README.md
+

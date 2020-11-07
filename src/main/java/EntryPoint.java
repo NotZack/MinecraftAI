@@ -1,5 +1,3 @@
-package com.example.examplemod;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraftforge.common.MinecraftForge;
@@ -18,14 +16,19 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
-@Mod("examplemod")
-public class ExampleMod
-{
+/** EntryPoint.java
+ * @author Zackary Nichol
+ *
+ */
+public class EntryPoint {
+
     // Directly reference a log4j logger.
     private static final Logger LOGGER = LogManager.getLogger();
 
-    public ExampleMod() {
+    /**
+     * Entry point into the application, registers events for the mod to run.
+     */
+    EntryPoint() {
         // Register the setup method for modloading
         FMLJavaModLoadingContext.get().getModEventBus().addListener(this::setup);
         // Register the enqueueIMC method for modloading

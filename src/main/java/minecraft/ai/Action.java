@@ -25,7 +25,9 @@ public class Action {
     }
 
     public void jump() {
-
+        robot.delay(1000);
+        robot.keyPress(KeyEvent.VK_SPACE);
+        robot.delay(1000);
     }
 
     public void move(boolean sprinting) {
@@ -36,9 +38,8 @@ public class Action {
 
     }
 
-    ////
     public void breakBlock() {
-        robot.mousePress(1);
+
     }
 
     ////
@@ -70,32 +71,10 @@ public class Action {
 
                 //Its possible that the origin is a different square than what im thinking...
 
-                double originHeight = centerHeight + (54 / 2);
+    }
 
+    public void checkInventory() {
 
-                double boxLocationX = originWidth + (i % 9) * 54;
-                double boxLocationY = originHeight + /*Or minus */ i / 9;
-
-                robot.mouseMove((int) boxLocationX, (int) boxLocationY);
-                // click this square
-                robot.mousePress(MouseEvent.BUTTON1);
-
-                // move cursor to the first inventory slot
-                robot.mouseMove((int) originWidth, (int) originHeight + (4 * 54));
-                //click that square
-                robot.mousePress(MouseEvent.BUTTON1);
-
-                //if there is still an item under the cursor
-                if (!player.inventory.getCurrentItem().isEmpty()) {
-                    robot.mouseMove((int) boxLocationX, (int) boxLocationY);
-                }
-                robot.mousePress(MouseEvent.BUTTON1);
-                robot.keyPress(KeyEvent.VK_E);
-                return true;
-            }
-        }
-        robot.keyPress(KeyEvent.VK_E);
-        return false;
     }
 
     public void eat() {

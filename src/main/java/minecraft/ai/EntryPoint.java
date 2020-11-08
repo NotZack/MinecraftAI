@@ -44,6 +44,8 @@ public class EntryPoint {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        MinecraftForge.EVENT_BUS.register(new PlayerEvents());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -51,9 +53,6 @@ public class EntryPoint {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
-
-        Action action = new Action();
-        action.checkInventory();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

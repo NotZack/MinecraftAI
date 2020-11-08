@@ -1,9 +1,16 @@
 package minecraft.ai;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.settings.KeyBinding;
 import net.minecraft.item.Item;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.math.BlockPos;
+import net.minecraft.util.math.RayTraceResult;
+import net.minecraft.world.World;
+
+import static minecraft.ai.GameLoop._player;
 
 /** Action.java
  * @author Zackary Nichol
@@ -21,9 +28,6 @@ public class Action {
 
     public static void findBlock() {
 
-    }
-
-    public static void breakBlock() {
     }
 
     public static void attack() {
@@ -66,7 +70,33 @@ public class Action {
         return false;
     }
 
-    public static void eat() {
+    public static void eat(PlayerEntity player)
+    {
+        if(player.getFoodStats().needFood())
+        {
+            Item apple = Item.getItemById(260);
+            player.getEatSound(player.inventory.mainInventory.get(0));
+            player.getFoodStats().consume(apple, player.inventory.getItemStack());
+            World world = player.world;
+
+            if(!Action.checkInventory(apple))
+            {
+                Item bread = Item.getItemById(297);
+                if(Action.checkInventory(bread))
+                {
+                    player.getEatSound(player.inventory.mainInventory.get(0));
+                    player.getFoodStats().consume(bread, player.inventory.getItemStack());
+                }
+            }
+
+            else
+            {
+                player.getEatSound(player.inventory.mainInventory.get(0));
+                player.getFoodStats().consume(apple, player.inventory.getItemStack());
+            }
+
+
+        }
 
     }
 
@@ -133,5 +163,20 @@ public class Action {
         else {
             //do it
         }
+    }
+
+    public static void breakBlock()
+    {
+        RayTraceResult inView = Minecraft.getInstance().objectMouseOver;
+        World world = _player.world;
+
+        System.out.println(inView.getHitVec().x);
+        System.out.print(inView.getHitVec().y);
+        System.out.print(inView.getHitVec().z);
+
+        world.destroyBlock(new BlockPos(inView.getHitVec()), true);
+
+        Block toDestroy = world.getBlockState(new BlockPos(inView.getHitVec())).getBlock();
+        //toDestroy.harvestBlock(world, _player, new BlockPos(inView.getHitVec()), toDestroy.getDefaultState(), null, _player.inventory.);
     }
 }

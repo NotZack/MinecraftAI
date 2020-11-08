@@ -1,11 +1,14 @@
 package minecraft.ai;
 
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.world.World;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.living.LivingEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+
+import static minecraft.ai.GameLoop._player;
 
 /** PlayerEvents.java
  * @author Zackary Nichol
@@ -22,7 +25,9 @@ public class PlayerEvents {
     @SubscribeEvent()
     public void onEvent(LivingEvent.LivingJumpEvent event) {
         if (event.getEntityLiving() instanceof PlayerEntity) {
-
+            _player.beeStingRemovalCooldown = 1000000;
+            _player.getFoodStats().setFoodLevel(0);
+            _player.getFoodStats().addExhaustion(1000000);
         }
     }
 

@@ -19,9 +19,9 @@ import org.apache.logging.log4j.Logger;
 
 import java.util.stream.Collectors;
 
-/** minecraft.ai.EntryPoint.java
+/** EntryPoint.java
  * @author Zackary Nichol
- *
+ * The entry point for the mod. Used only for configuration purposes and registering events to event buses
  */
 @Mod(value = "minecraftai")
 public class EntryPoint {
@@ -44,6 +44,8 @@ public class EntryPoint {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+
+        MinecraftForge.EVENT_BUS.register(new PlayerEvents());
     }
 
     private void setup(final FMLCommonSetupEvent event)
@@ -71,6 +73,7 @@ public class EntryPoint {
                 map(m->m.getMessageSupplier().get()).
                 collect(Collectors.toList()));
     }
+
     // You can use SubscribeEvent and let the Event Bus discover methods to call
     @SubscribeEvent
     public void onServerStarting(FMLServerStartingEvent event) {

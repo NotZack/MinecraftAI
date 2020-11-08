@@ -47,6 +47,9 @@ public class EntryPoint {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
+        Action action = new Action();
+        action.checkInventory();
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {

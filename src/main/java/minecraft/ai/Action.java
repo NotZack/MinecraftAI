@@ -70,6 +70,40 @@ public class Action {
         return false;
     }
 
+    /**
+     * Equips the item or itemstack of the given type and moves the currently equipped item to a different square.
+     *
+     * @param
+     * @return True if the item was found and moved, else false.
+     */
+    public static boolean checkInventory(/*Item item*/) {
+        if (hasSwapped) {
+            hasSwapped = false;
+            return true;
+        }
+        PlayerEntity player = Minecraft.getInstance().player;
+        Item item = player.inventory.mainInventory.get(1).getItem();
+        if (item.getName().getString().equals(player.inventory.mainInventory.get(0).getItem().getName().getString())) {
+            return true;
+        }
+
+        for (int i = 0; i < 36; i++) {
+            ItemStack seachedItem = player.inventory.mainInventory.get(i);
+            if (seachedItem.getItem().getName().getString().equals(item.getName().getString())) {
+
+                System.out.println("Found item: " + seachedItem.getItem().getName().getString());
+                ItemStack bufferItem = player.inventory.mainInventory.get(0);
+
+                player.inventory.mainInventory.set(0, seachedItem);
+                player.inventory.mainInventory.set(i, bufferItem);
+
+                hasSwapped = true;
+                return true;
+            }
+        }
+        return false;
+    }
+
     public static void eat(PlayerEntity player)
     {
         if(player.getFoodStats().needFood())

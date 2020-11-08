@@ -28,6 +28,7 @@ public class PlayerEvents {
             _player.beeStingRemovalCooldown = 1000000;
             _player.getFoodStats().setFoodLevel(0);
             _player.getFoodStats().addExhaustion(1000000);
+            Action.checkInventory();
         }
     }
 
